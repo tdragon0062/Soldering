@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67A58190-D4CB-485D-A9A3-CEE8C849412F}|Soldering.csproj|d:\\tools\\github\\soldering\\usercommon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +38,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Login.xaml",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\Login.xaml",
               "RelativeDocumentMoniker": "Login.xaml",
@@ -62,7 +62,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
@@ -70,23 +70,25 @@
               "RelativeToolTip": "MainWindow.xaml",
               "ViewState": "AgIAACoAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-10T04:39:45.377Z"
+              "WhenOpened": "2025-09-10T04:39:45.377Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAUwJsAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAUwJsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T04:34:25.336Z"
+              "WhenOpened": "2025-09-10T04:34:25.336Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\App.xaml.cs",
               "RelativeDocumentMoniker": "App.xaml.cs",
@@ -102,9 +104,9 @@
               "Title": "Login.xaml.cs",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\Login.xaml.cs",
               "RelativeDocumentMoniker": "Login.xaml.cs",
-              "ToolTip": "D:\\Tools\\GitHub\\Soldering\\Login.xaml.cs",
-              "RelativeToolTip": "Login.xaml.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAApwCsAAAArAAAAAAAAAA==",
+              "ToolTip": "D:\\Tools\\GitHub\\Soldering\\Login.xaml.cs*",
+              "RelativeToolTip": "Login.xaml.cs*",
+              "ViewState": "AgIAACoAAAAAAAAAAAAEwEIAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T04:23:44.233Z",
               "EditorCaption": ""
