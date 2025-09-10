@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Soldering (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Soldering (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

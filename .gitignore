@@ -1,0 +1,17 @@
+# 빌드 출력
+bin/
+obj/
+
+# VS 사용자 설정
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 패키지 산출물
+[Ss]oldering-Mgmt (Package)/
+[Rr]eference/
+*.nupkg
+
+# 기타
+*.log
