@@ -63,7 +63,8 @@ public sealed partial class Login : Window
         if (!File.Exists(filePath))
         {
             //errorMessage = "사용자 파일이 존재하지 않습니다." + Environment.NewLine + $"{AppContext.BaseDirectory}";
-            //errorMessage = "사용자 파일이 존재하지 않습니다." + Environment.NewLine + $"{filePath}";
+            //errorMessage = "사용자 파일이 존재하지 않습니다." + Environment.NewLine + $"{filePath.Substring(0,50)}"  + Environment.NewLine +  $"{filePath.Substring(50,  filePath.Length - 50)}" ;
+            
             errorMessage = "사용자 파일이 존재하지 않습니다." + Environment.NewLine + "관리자에 연락 하세요. ";
             UserCheckMSG.ShowErrorMSG(this.Content.XamlRoot, errorGubun, errorMessage);
             return;
