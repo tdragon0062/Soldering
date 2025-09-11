@@ -44,7 +44,7 @@
               "RelativeDocumentMoniker": "Login.xaml",
               "ToolTip": "D:\\Tools\\GitHub\\Soldering\\Login.xaml",
               "RelativeToolTip": "Login.xaml",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAhwBQAAABbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-09-10T09:53:01.517Z",
               "EditorCaption": ""
@@ -71,8 +71,7 @@
               "RelativeToolTip": "MainWindow.xaml",
               "ViewState": "AgIAACoAAAAAAAAAAADwvzoAAACBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-10T04:39:45.377Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T04:39:45.377Z"
             },
             {
               "$type": "Document",
@@ -108,8 +107,7 @@
               "RelativeToolTip": "Login.xaml.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAhwD8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T04:23:44.233Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T04:23:44.233Z"
             }
           ]
         }
