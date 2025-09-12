@@ -45,16 +45,18 @@ namespace Soldering_Mgmt
         // 카메라 스트리밍을 위한 전역변수 선언
         private MediaCapture _mediaCapture;
         private DispatcherTimer _frameTimer;
-        // 유휴 시간 처리 
-        private IdleSessionManager? _idle;
-        private DispatcherTimer _timer;
+        // 타이머 핸들   
+        private DispatcherTimer _uiTimer;
+        public event Action? OnIdleTimeoutTriggered;
+        private UserIdleCheck _idleCheck = new UserIdleCheck();
 
         public MainWindow()
         {
             this.InitializeComponent();
             // 창에서 최대화 버튼 제거
             DisableMaximizeButton();
-           
+            DisableCloseButton();
+
             // Full Screen을 위해 현재 윈도우 인스턴스를 가져옵니다
             var hwnd = WindowNative.GetWindowHandle(this);
             var windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
@@ -70,28 +72,21 @@ namespace Soldering_Mgmt
                 {
                     p.Maximize(); // 창틀은 유지되고, 화면 전체로 확장됨
                     p.IsResizable = false; // 창틀에서 Resize 방지
-                    p.IsMaximizable = false;
-                    p.IsMinimizable = false;
                 }     
             }
-            //  N 분 유휴 → 강제 로그아웃
-            _idle = new IdleSessionManager(this, TimeSpan.FromMinutes(2), OnIdleTimeout);
+            // 유휴 시간 처리 설정 및 핸들러 전달
+            UserSession.tmOutMin = 1;
+            _idleCheck.TimerSet(this, UserSession.tmOutMin,OnIdleTimeout);
+            // 2. UI 시계 갱신 타이머 (매 분)
+            _uiTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
+            _uiTimer.Tick += (s, e) => UpdateCurrentTime();
+            _uiTimer.Start();
 
-            // 1. DispatcherTimer 초기화
-            _timer = new DispatcherTimer();
-
-            // 2. 타이머 주기 설정 (1분 = 60초)
-            // TimeSpan.FromMinutes(1)은 분 단위로 설정
-            _timer.Interval = TimeSpan.FromMinutes(1);
-
-            // 3. Tick 이벤트 핸들러 연결
-            _timer.Tick += Timer_Tick;
-
-            // 4. 타이머 시작
-            _timer.Start();
-
-            // 5. 초기 시간 표시
             UpdateCurrentTime();
+
+            // MainWindow 이미지 디스플레이
+            ImageDisplay();
+
 
             // 조건에 따라 SEMEMA 통신 진입부 배출부 표기 컬러 지정
             // DeepPinkInterInBorderColor(), LightGrayInterInBorderColor(), DeepPinkInterOutBorderColor(), LightGrayInterOutBorderColor()
@@ -125,23 +120,81 @@ namespace Soldering_Mgmt
                 SuckBackRpm.Text = (NumSuckBackRpm.Value.ToString());
 
             //  Main Pressure 도넛 상태표기
-            // 예: 실시간 센서 값 6.0, 5.0  정상 : Green,  경고 : Yellow, 에러 : Red
+            // 예: 실시간 센서 값 6.0, 5.0  정상 : Green,  에러 : Red
             MainPressureOne.Text = "6";
             MainPressureTwo.Text = "5";
             MainDonutArc.Stroke = new SolidColorBrush(Colors.Green);
             UpdateDonut("Main", "green");
             // N2 Pressure 도넛 상태표기
-            // 예: 실시간 센서 값 6.0, 5.0  정상 : Green,  경고 : Yellow, 에러 : Red
+            // 예: 실시간 센서 값 6.0, 5.0  정상 : Green,  에러 : Red
             NTwoPressureOne.Text = "4";
             NTwoPressureTwo.Text = "8";
             NTwoDonutArc.Stroke = new SolidColorBrush(Colors.Green);
-            UpdateDonut("NTwo", "yellow");
+            UpdateDonut("NTwo", "green");
             // Tank Pressure 도넛 상태표기
-            // 예: 실시간 센서 값 6.0, 5.0  정상 : Green,  경고 : Yellow, 에러 : Red
+            // 예: 실시간 센서 값 6.0, 5.0  정상 : Green, 에러 : Red
             TankPressureOne.Text = "7";
+            TankPressureOne.Foreground = new SolidColorBrush(Colors.Red);
             TankPressureTwo.Text = "2";
+            TankPressureDot.Foreground = new SolidColorBrush(Colors.Red);
+            TankPressureTwo.Foreground = new SolidColorBrush(Colors.Red);
+            TankPressureMpa.Foreground = new SolidColorBrush(Colors.Red);
             TankDonutArc.Stroke = new SolidColorBrush(Colors.Green);
             UpdateDonut("Tank", "red");
+        }
+        // Disable Close Button
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+
+        [DllImport("user32.dll")]
+        private static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+
+        private const uint SC_CLOSE = 0xF060;
+        private const uint MF_GRAYED = 0x00000001;
+        private const uint MF_BYCOMMAND = 0x00000000;
+
+        private void DisableCloseButton()
+        {
+            var hWnd = WindowNative.GetWindowHandle(this);
+            IntPtr hMenu = GetSystemMenu(hWnd, false);
+            if (hMenu != IntPtr.Zero)
+            {
+                EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+            }
+        }
+        private void ImageDisplay()
+        {
+            // 솔루션 루트 경로 구하고 이미지 파일 경로 생성
+            string solutionDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
+
+
+            // Buzzer Stop 이미지 Source 설정
+            string imagePath = System.IO.Path.Combine(solutionDir, "img", "gaon-logo-black_ko.png");
+            GaonLogoImage.Source = new BitmapImage(new Uri(imagePath)); 
+
+            // Buzzer Stop 이미지 Source 설정
+            imagePath = System.IO.Path.Combine(solutionDir, "img", "buzzer-stop.png");
+            BuzzerStopImage.Source = new BitmapImage(new Uri(imagePath));
+
+            // AutoModeBtn  이미지 Source 설정
+            imagePath = System.IO.Path.Combine(solutionDir, "img", "AutoModeBtn.png");
+            AutoModeBtnImage.Source = new BitmapImage(new Uri(imagePath));
+
+            // ManualModeBtn  이미지 Source 설정
+            imagePath = System.IO.Path.Combine(solutionDir, "img", "ManualModeBtn.png");
+            ManualModeBtnImage.Source = new BitmapImage(new Uri(imagePath));
+
+            // StartBtn  이미지 Source 설정
+            imagePath = System.IO.Path.Combine(solutionDir, "img", "StartBtn.png");
+            StartBtnImage.Source = new BitmapImage(new Uri(imagePath));
+
+            // StopBtn  이미지 Source 설정
+            imagePath = System.IO.Path.Combine(solutionDir, "img", "StopBtn.png");
+            StopBtnImage.Source = new BitmapImage(new Uri(imagePath));
+
+            // ResetBtn  이미지 Source 설정
+            imagePath = System.IO.Path.Combine(solutionDir, "img", "ResetBtn.png");
+            ResetBtnImage.Source = new BitmapImage(new Uri(imagePath));            
         }
         private void LineInfoDisplay()
         {
@@ -196,7 +249,7 @@ namespace Soldering_Mgmt
             // 타이머가 1분마다 호출되면 실행
             UpdateCurrentTime();
         }
-        private void UpdateCurrentTime()
+        public void UpdateCurrentTime()
         {
             // 현재 시간을 "YYYY-MM-DD HH:MM" 형식으로 포맷
             string formattedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
@@ -231,21 +284,42 @@ namespace Soldering_Mgmt
             var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
             return AppWindow.GetFromWindowId(windowId);
         }
+        // 재로그인 시 화면 리프레쉬
+        public async void RefreshUiWithNewUser()
+        {
+            if (UserSession.UserId != null)
+            {
+                User.Text = UserSession.UserId;
+                UpdateCurrentTime();
+            }
+            else
+            {
+                string errorGubun = "로그인";
+                string errorMessage = "다시 로그인이 필요합니다.";
+                await UserCheckMSG.ShowErrorMSG(this.Content.XamlRoot, errorGubun, errorMessage);
+            }
+        }
        
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             string confirmGubun = "로그인";
-            string confirmMSG = "현재 사용자환경과 화면이 닫혀잡나다." + Environment.NewLine + "정말 로그인 하시겠습니까";
+            string confirmMSG = "정말 현재 사용자를 변경하고 싶으십니까? ";
             bool ok = await UserCheckMSG.ShowConfirmMSG(this.Content.XamlRoot, confirmGubun, confirmMSG);
             if (ok)
             {
                 UserSession.UserId = null;
-                var newlogin = new Login();
-                newlogin.Activate();
-                this.Close();
+                // 세션로그아웃 다시 설정
+
+                _idleCheck.Restart(this, UserSession.tmOutMin, OnIdleTimeout);
+
+                // App에게 알림 (직접 Login 띄우지 않고 App에 위임)
+                OnIdleTimeoutTriggered?.Invoke();          
+                // UserSession.UserId = null;
+                // var newlogin = new Login();
+                // newlogin.Activate();
+                // this.Close();
             }
-        }
-      
+        }             
         private async Task OnIdleTimeout()
         {
 
@@ -256,15 +330,14 @@ namespace Soldering_Mgmt
             // UI 스레드에서 처리
             this.DispatcherQueue.TryEnqueue(() =>
             {
-                                // 1) 세션 정리
-                UserSession.UserId = null;       // ← 'Clear()'가 없으면 이렇게만 하시면 됩니다.
+                //  세션 정리
+                UserSession.UserId = null;
+                // 세션로그아웃 다시 설정
 
-                // 2) 로그인 화면을 새 창으로 띄우거나(독립 Window) / 다이얼로그로 띄우거나 / 프레임 전환
-                var login = new Login();         // Login : Window 또는 Page/UserControl
-                login.Activate();                // 새 창일 때
+                _idleCheck.Restart(this, UserSession.tmOutMin, OnIdleTimeout);
 
-                // 메인 윈도우 창을 닫음
-                this.Close();
+                // App에게 알림 (직접 Login 띄우지 않고 App에 위임)
+                OnIdleTimeoutTriggered?.Invoke();               
             });
         }
         private async void OriginBtn_Click(object sender, RoutedEventArgs e)
@@ -327,9 +400,19 @@ namespace Soldering_Mgmt
             // 2. Tag가 null 이 아니면 ToString() 호출 null 이면 "" 
             string tagValue = clickedButton.Tag?.ToString() ?? string.Empty;
 
-            string errorGubun = "태그값";
-            string errorMessage = $"버튼의 태그 값 : {tagValue}";
-            await UserCheckMSG.ShowErrorMSG(this.Content.XamlRoot, errorGubun, errorMessage);
+            if (UserSession.UserId != "root")
+            {
+                string errorGubun = "권한오류";
+                string errorMessage = "슈퍼 관리자만 설정 변경이 가능합니다.";
+                await UserCheckMSG.ShowErrorMSG(this.Content.XamlRoot, errorGubun, errorMessage);
+                return;
+            }
+            else
+            {
+                string errorGubun = "태그값";
+                string errorMessage = $"버튼의 태그 값 : {tagValue}";
+                await UserCheckMSG.ShowErrorMSG(this.Content.XamlRoot, errorGubun, errorMessage);
+            }
         }
         private void MainBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -337,9 +420,9 @@ namespace Soldering_Mgmt
             if (button != null)
             {
                 string currTagColor = button.Tag.ToString();
-                string currBGColor = "Gray";
+                string currBGColor = "DeepPink";
                 string currFGColor = "White";
-                string toBGColor = "DeepPink";
+                string toBGColor = "Gray";
                 string toFGColor = "White";
 
                 UserBtnColorSet.ButtonColorSet(button, currTagColor, currBGColor, currFGColor, toBGColor, toFGColor);
@@ -360,20 +443,6 @@ namespace Soldering_Mgmt
             }
         }
         private void PassiveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            if (button != null)
-            {
-                string currTagColor = button.Tag.ToString();
-                string currBGColor = "Gray";
-                string currFGColor = "White";
-                string toBGColor = "DeepPink";
-                string toFGColor = "White";
-
-                UserBtnColorSet.ButtonColorSet(button, currTagColor, currBGColor, currFGColor, toBGColor, toFGColor);
-            }
-        }
-        private void LSetUpBtn_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             if (button != null)
@@ -819,7 +888,7 @@ namespace Soldering_Mgmt
             "red" => Colors.Red,
             _ => Colors.Gray
         };
-    }
+    }    
     private void StopFrameTimer()
         {
             _frameTimer?.Stop();

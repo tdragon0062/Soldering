@@ -26,13 +26,14 @@ namespace Soldering_Mgmt;
 /// </summary>
 public sealed partial class Login : Window
 {
+    // 자식 컨트롤 접근 위해 이벤트 추가
+    public event Action<string>? LoginSuccess;
     public Login()
     {
         this.InitializeComponent();
-        // 솔루션 루트 경로 구하기
-        string solutionDir = Path.GetFullPath(
-            Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
-
+       
+    // 솔루션 루트 경로 구하고 이미지 파일 경로 생성
+    string solutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
         string imagePath = Path.Combine(solutionDir, "img", "gaon-logo-black_ko.png");
 
         // 이미지 Source 설정
@@ -159,9 +160,10 @@ public sealed partial class Login : Window
             }
 
             UserSession.UserId = id;
-
-            var mainWindow = new MainWindow();
-            mainWindow.Activate();
+            // 이벤트 호출
+            LoginSuccess?.Invoke(id);
+          //  var mainWindow = new MainWindow();
+           // mainWindow.Activate();
             this.Close();
         }
         else

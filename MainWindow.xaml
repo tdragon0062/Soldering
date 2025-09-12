@@ -81,20 +81,20 @@
         <!--Border Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" BorderBrush="Red" BorderThickness="2"-->
         <Border Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Border Background="LightBlue"  HorizontalAlignment="Left" Margin="30,5,0,0"  Width="140" Height="Auto" >
-                    <Image Source="/img/gaon-logo-black_ko.png"  VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5,10,0,10" Width="120" Height="Auto"/>
+                <Border Background="LightBlue"  HorizontalAlignment="Left" Margin="30,5,0,0"  Width="140" Height="Auto" >                   
+                    <Image  x:Name="GaonLogoImage" Stretch="Uniform"  VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5,10,0,10" Width="120" Height="Auto"/>
                 </Border>
-                <Button x:Name="MainBtn" Content="메인" Click="MainBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
+                <Button x:Name="MainBtn" Content="메인" Click="MainBtn_Click" Background="DeepPink" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="DeepPink"/>
                 <Button x:Name="RecipeBtn" Content="레시피" Click="RecipeBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
                 <Button x:Name="PassiveBtn" Content="수동모드" Click="PassiveBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
-                <Button x:Name="LSetUpBtn" Content="셋업" Click="LSetUpBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
+                <!--Button x:Name="LSetUpBtn" Content="셋업" Click="LSetUpBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/-->
                 <Button x:Name="IOBtn" Content="IO" Click="IOBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
                 <Button x:Name="AlramBtn" Content="알람/이벤트" Click="AlramBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="18" Tag="Gray"/>
                 <Button x:Name="ChartBtn" Content="챠트" Click="ChartBtn_Click" Background="Gray" Foreground="White" Margin="40,5,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
-                <Button x:Name="BuzzerStopBtn" Click="BuzzerStopBtn_Click"  Margin="40,5,0,0" Width="125" Height="100"  Tag="BuzzerStopBtn">
-                    <Image Source="/img/buzzer-stop.png"/>
+                <Button x:Name="BuzzerStopBtn" Click="BuzzerStopBtn_Click"  Margin="40,20,0,0" Width="125" Height="100"  Tag="BuzzerStopBtn">
+                    <Image  x:Name="BuzzerStopImage" Stretch="Uniform"/>
                 </Button>
-                <Border Background="LightGray"   BorderBrush="DarkBlue" BorderThickness="1" HorizontalAlignment="Left" Margin="40,10,0,0"  Padding="5"  Width="125" Height="25" >
+                <Border Background="LightGray"   BorderBrush="DarkBlue" BorderThickness="1" HorizontalAlignment="Left" Margin="40,20,0,0"  Padding="5"  Width="125" Height="25" >
                     <TextBlock Text="스메마(SMEMA)통신"  Foreground="Black" FontWeight="Bold"  FontSize="12"/>
                 </Border>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
@@ -122,7 +122,7 @@
                 </StackPanel>
                 <!-- 화면 왼쪽 수직 Bypass 버튼 과 프로그램 종료버튼  -->
                 <Button x:Name="ByPassBtn" Content="Bypass" Click="ByPassBtn_Click" Background="Gray" Foreground="White" Margin="40,10,0,0" Width="125" Height="40" FontSize="20" Tag="Gray"/>
-                <Button x:Name="ExitBtn" Content="종료" Click="ExitBtn_Click" Background="Gray" Foreground="White" Margin="40,10,0,0" Width="125" Height="80" FontSize="20" Tag="Gray"/>
+                <Button x:Name="ExitBtn" Content="종료" Click="ExitBtn_Click" Background="Gray" Foreground="White" Margin="40,10,0,0" Width="125" Height="100" FontSize="20" Tag="Gray"/>
             </StackPanel>
         </Border>
         <!-- #3: 중간 상단 모니터 카메라 콘텐츠 영역 -->
@@ -548,9 +548,9 @@
                                 <Canvas x:Name="MainDonutCanvas" Width="60" Height="70" Margin="0,2,0,0" Background="Transparent">
                                     <Path x:Name="MainDonutArc" Stroke="Green" StrokeThickness="10" />
                                     <TextBlock x:Name="MainPressureOne" FontSize="16" FontWeight="Bold" Foreground="Black" Canvas.Left="18" Canvas.Top="20"/>
-                                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="28" Canvas.Top="20" Text=","/>
+                                    <TextBlock  x:Name="MainPressureDot" FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="28" Canvas.Top="20" Text=","/>
                                     <TextBlock x:Name="MainPressureTwo" FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="32" Canvas.Top="20"/>
-                                    <TextBlock  FontSize="14" Foreground="Black" Canvas.Left="18" Canvas.Top="45" Text="MPa"/>
+                                    <TextBlock   x:Name="MainPressureMpa" FontSize="14" Foreground="Black" Canvas.Left="18" Canvas.Top="45" Text="MPa"/>
                                 </Canvas>
                             </StackPanel>
                             <StackPanel Orientation="Vertical"  VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0,0,0,0">
@@ -559,9 +559,9 @@
                                 <Canvas x:Name="NTwoDonutCanvas" Width="60" Height="70" Margin="0,2,0,0" Background="Transparent">
                                     <Path x:Name="NTwoDonutArc" Stroke="Green" StrokeThickness="10" />
                                     <TextBlock x:Name="NTwoPressureOne" FontSize="16" FontWeight="Bold" Foreground="Black" Canvas.Left="18" Canvas.Top="20"/>
-                                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="28" Canvas.Top="20" Text=","/>
+                                    <TextBlock x:Name="NTwoPressureDot"  FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="28" Canvas.Top="20" Text=","/>
                                     <TextBlock x:Name="NTwoPressureTwo" FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="32" Canvas.Top="20"/>
-                                    <TextBlock  FontSize="14" Foreground="Black" Canvas.Left="18" Canvas.Top="45" Text="MPa"/>
+                                    <TextBlock  x:Name="NTwoPressureMpa" FontSize="14" Foreground="Black" Canvas.Left="18" Canvas.Top="45" Text="MPa"/>
                                 </Canvas>
                             </StackPanel>
                             <StackPanel Orientation="Vertical"  VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0,0,0,0">
@@ -570,9 +570,9 @@
                                 <Canvas x:Name="TankDonutCanvas" Width="60" Height="70" Margin="0,2,0,0" Background="Transparent">
                                     <Path x:Name="TankDonutArc" Stroke="Green" StrokeThickness="10" />
                                     <TextBlock x:Name="TankPressureOne" FontSize="16" FontWeight="Bold" Foreground="Black" Canvas.Left="18" Canvas.Top="20"/>
-                                    <TextBlock FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="28" Canvas.Top="20" Text=","/>
+                                    <TextBlock x:Name="TankPressureDot" FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="28" Canvas.Top="20" Text=","/>
                                     <TextBlock x:Name="TankPressureTwo" FontSize="16" FontWeight="Bold" Foreground="Black"  Canvas.Left="32" Canvas.Top="20"/>
-                                    <TextBlock  FontSize="14" Foreground="Black" Canvas.Left="18" Canvas.Top="45" Text="MPa"/>
+                                    <TextBlock x:Name="TankPressureMpa"  FontSize="14" Foreground="Black" Canvas.Left="18" Canvas.Top="45" Text="MPa"/>
                                 </Canvas>
                             </StackPanel>
                         </StackPanel>
@@ -618,20 +618,20 @@
                     </Border>
                 </Grid>
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="LightGray"  Margin="0,8,0,0" Width="400">
-                    <Button x:Name="AutoModeBtn" Click="AutoModeBtn_Click"  Width="80" Height="80"  Tag="AutoModeBtn">
-                        <Image Source="/img/AutoModeBtn.png"/>
+                    <Button x:Name="AutoModeBtn" Click="AutoModeBtn_Click"  Width="80" Height="80"  Tag="AutoModeBtn">                        
+                        <Image  x:Name="AutoModeBtnImage" Stretch="Uniform"/>
                     </Button>
                     <Button x:Name="ManualModeBtn" Click="ManualModeBtn_Click"  Width="80" Height="80"  Tag="ManualModeBtn">
-                        <Image Source="/img/ManualModeBtn.png"/>
+                        <Image x:Name="ManualModeBtnImage" Stretch="Uniform"/>
                     </Button>
                     <Button x:Name="StartBtn" Click="StartBtn_Click"  Width="80" Height="80"  Tag="StartBtn">
-                        <Image Source="/img/StartBtn.png"/>
+                        <Image x:Name="StartBtnImage" Stretch="Uniform"/>                       
                     </Button>
                     <Button x:Name="StopBtn" Click="StopBtn_Click"  Width="80" Height="80"  Tag="StopBtn">
-                        <Image Source="/img/StopBtn.png"/>
+                        <Image x:Name="StopBtnImage" Stretch="Uniform"/> 
                     </Button>
                     <Button x:Name="ResetBtn" Click="ResetBtn_Click"  Width="80" Height="80"  Tag="ResetBtn">
-                        <Image Source="/img/ResetBtn.png"/>
+                         <Image x:Name="ResetBtnImage" Stretch="Uniform"/>                        
                     </Button>
                 </StackPanel>              
             </StackPanel>
