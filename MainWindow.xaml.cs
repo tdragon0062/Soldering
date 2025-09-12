@@ -165,8 +165,8 @@ namespace Soldering_Mgmt
         private void ImageDisplay()
         {
             // 솔루션 루트 경로 구하고 이미지 파일 경로 생성
-            string solutionDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
-
+            //string solutionDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
+            string solutionDir = AppContext.BaseDirectory;
 
             // Buzzer Stop 이미지 Source 설정
             string imagePath = System.IO.Path.Combine(solutionDir, "img", "gaon-logo-black_ko.png");

@@ -32,9 +32,9 @@ public sealed partial class Login : Window
     {
         this.InitializeComponent();
        
-    // 솔루션 루트 경로 구하고 이미지 파일 경로 생성
-    string solutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
-        string imagePath = Path.Combine(solutionDir, "img", "gaon-logo-black_ko.png");
+        // 솔루션 루트 경로 구하고 이미지 파일 경로 생성
+        //string solutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\.."));
+         string imagePath = Path.Combine(AppContext.BaseDirectory, "img", "gaon-logo-black_ko.png");
 
         // 이미지 Source 설정
         LogoImage.Source = new BitmapImage(new Uri(imagePath));
@@ -59,7 +59,8 @@ public sealed partial class Login : Window
         // string filePath = Path.Combine(baseDir, "data", "users.csv");
 
         // string filePath = Path.Combine(AppContext.BaseDirectory, "data", "users.csv");
-        string filePath = Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\..", "data", "users.csv");
+        //string filePath = Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\..\..", "data", "users.csv");
+        string filePath = Path.Combine(AppContext.BaseDirectory, "data", "users.csv");
 
         if (!File.Exists(filePath))
         {
