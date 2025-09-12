@@ -54,8 +54,7 @@
               "RelativeToolTip": "UserIdleCheck.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T03:41:35.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T03:41:35.242Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "UserSession.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T07:28:48.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T07:28:48.015Z"
             },
             {
               "$type": "Document",
@@ -92,8 +90,7 @@
               "RelativeToolTip": "UserCommon.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAQwBEAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T04:45:13.175Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T04:45:13.175Z"
             },
             {
               "$type": "Document",
@@ -101,12 +98,11 @@
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml*",
-              "RelativeToolTip": "MainWindow.xaml*",
+              "ToolTip": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
               "ViewState": "AgIAABsCAAAAAAAAAAAmwEECAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-10T04:39:45.377Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T04:39:45.377Z"
             },
             {
               "$type": "Document",
@@ -114,8 +110,8 @@
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml.cs*",
-              "RelativeToolTip": "MainWindow.xaml.cs*",
+              "ToolTip": "D:\\Tools\\GitHub\\Soldering\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
               "ViewState": "AgIAAG8AAAAAAAAAAAASwJEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T04:34:25.336Z",
